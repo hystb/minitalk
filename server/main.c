@@ -6,77 +6,102 @@
 /*   By: nmilan <nmilan@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/09 13:57:51 by nmilan            #+#    #+#             */
-/*   Updated: 2023/01/10 16:22:32 by nmilan           ###   ########.fr       */
+/*   Updated: 2023/01/12 14:39:55 by nmilan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <signal.h>
-#include <stdlib.h>
-#include "../ft_printf/ft_printf.h"
+#include "server.h"
 
-void	get_message(int sig);
-int		convert_back_int(char *str, int *is_first);
+t_data	g_data;
 
 int	main(int argc, char **argv)
 {
 	pid_t	pid;
 
 	pid = getpid();
+	g_data.is_finish = 0;
+	g_data.is_first = 0;
 	ft_printf("Server has started\nPID : %d\n", pid);
-	signal(SIGUSR1, get_message);
-	signal(SIGUSR2, get_message);
+	if (g_data.is_first == 0)
+	{
+		signal(SIGUSR1, get_size);
+		signal(SIGUSR2, get_size);
+	}
+	else
+	{
+		g_data.message = malloc(sizeof(char) * (g_data.size + 1));
+		if (!g_data.message)
+			exit(1);
+		signal(SIGUSR1, get_message);
+		signal(SIGUSR2, get_message);
+	}
 	while (1)
+	{
 		pause();
+		if (g_data.is_finish == 1)
+		{
+			ft_printf("%d", g_data.message);
+			g_data.is_finish = 0;
+		}
+	}
 	return (0);
 }
 
-void	get_message(int sig)
+void	get_size(int sig)
 {
-	static int		i = 0;
-	static int		is_first = 0;
-	char			len[33];
-	char			*res;
+	static int	i = 0;
 
 	if (i < 32)
 	{
 		if (sig == 30)
-			len[i] = '0';
-		else
-			len[i] = '1';
-		i++;
-	}
-	else
-	{
-		if (is_first == 0)
 		{
-			res = malloc(sizeof(char) * (convert_back_int(len, &is_first) + 1));
-			ft_printf(" malloc : %d\n", convert_back_int(len, &is_first));
+			g_data.size *= 2;
+			g_data.size = g_data.size + 0;
 		}
 		else
 		{
-			len[32] = '\0';
-			ft_printf("%s\n", len);
+			g_data.size *= 2;
+			g_data.size = g_data.size + 1;
+		}
+		i++;
+		if (i == 32)
+		{
+			g_data.is_first = 1;
+			i = 0;
 		}
 	}
 }
 
-int	convert_back_int(char *str, int *is_first)
+void	get_message(int sig)
 {
-	int		i;
-	int		res;
+	static int	x = 0;
+	static char	c = 0;
+	static int	i = 0;
 
-	i = 0;
-	res = 0;
-	*is_first = 1;
-	while (i < 31)
+	if (x++ < 8)
 	{
-		res = res + str[i] - '0';
-		res = res * 2;
-		i++;
+		if (sig == 30)
+		{
+			ft_printf("ok\n");
+			c *= 2;
+			c = c + 0;
+		}
+		else
+		{
+			ft_printf("ok\n");
+			c *= 2;
+			c = c + 1;
+		}
+		if (x == 8)
+		{
+			g_data.message[i++] = c;
+			c = 0;
+			x = 0;
+		}
+		if (i == g_data.size - 1)
+			g_data.is_finish = 1;
 	}
-	return (res);
 }
-
 //char c
 //c = 0 + c << 1;
 //c = 1 + c << 1;
