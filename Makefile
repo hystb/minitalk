@@ -5,37 +5,24 @@
 #                                                     +:+ +:+         +:+      #
 #    By: nmilan <nmilan@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
-#    Created: 2023/01/16 17:44:02 by nmilan            #+#    #+#              #
-#    Updated: 2023/01/16 17:46:32 by nmilan           ###   ########.fr        #
+#    Created: 2023/01/16 17:43:21 by nmilan            #+#    #+#              #
+#    Updated: 2023/01/16 17:51:26 by nmilan           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-SRC    =	main.c
+SERVER_PATH = server
 
-OBJS    =    ${SRC:%.c=%.o}
+CLIENT_PATH = client
 
-CC    = cc
+all : Makefile
 
-NAME    = client
-
-CFLAGS    = -Wall -Wextra -Werror
-
-all :        ${NAME}
-
-
-${NAME} : ${OBJS} Makefile
-			$(CC) $(OBJS) -o $(NAME)
 clean :
-	rm -f $(OBJS)
+	make clean -C $(SERVER_PATH)
+	make clean -C $(CLIENT_PATH)
 
-fclean :	clean
-	rm -f $(NAME)
+fclean : clean
 
-re :		fclean
-			make all
-
-%.o: %.c    Makefile $(INCLUDE)
-		${CC} ${CFLAGS} -c $< -o $@
-
+re : fclean
+	make all
 
 .PHONY:        all clean fclean re
