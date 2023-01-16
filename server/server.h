@@ -6,7 +6,7 @@
 /*   By: nmilan <nmilan@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/12 10:57:39 by nmilan            #+#    #+#             */
-/*   Updated: 2023/01/16 16:51:49 by nmilan           ###   ########.fr       */
+/*   Updated: 2023/01/16 18:31:42 by nmilan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 
 # include <signal.h>
 # include <stdlib.h>
+# include <unistd.h>
 # include "../ft_printf/ft_printf.h"
 
 void	receive_message(int sig);

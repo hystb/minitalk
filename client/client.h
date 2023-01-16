@@ -1,23 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   utils.c                                            :+:      :+:    :+:   */
+/*   client.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: nmilan <nmilan@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/01/16 16:39:23 by nmilan            #+#    #+#             */
-/*   Updated: 2023/01/16 18:28:05 by nmilan           ###   ########.fr       */
+/*   Created: 2023/01/16 18:20:00 by nmilan            #+#    #+#             */
+/*   Updated: 2023/01/16 18:35:02 by nmilan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "server.h"
+#ifndef CLIENT_H
+# define CLIENT_H
 
-void	reset_end_message(char *res, int *i, int *is_finish, int size)
-{
-	if (*i == size)
-	{
-		res[*i] = '\0';
-		*i = 0;
-		*is_finish = 3;
-	}
-}
+# include <signal.h>
+# include <unistd.h>
+# include <limits.h>
+# include <stdlib.h>
+
+void	send_size(int size, int x, char **argv);
+void	send_message(int x, char **argv, int i);
+void	is_int(char *str);
+long	ft_atoi(const char *str);
+int		ft_strlen(char *str);
+
+#endif

@@ -6,15 +6,18 @@
 #    By: nmilan <nmilan@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/01/16 17:44:02 by nmilan            #+#    #+#              #
-#    Updated: 2023/01/16 17:46:32 by nmilan           ###   ########.fr        #
+#    Updated: 2023/01/16 18:24:21 by nmilan           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-SRC    =	main.c
+SRC    =	main.c \
+			utils.c
 
 OBJS    =    ${SRC:%.c=%.o}
 
 CC    = cc
+
+INCLUDE		=	client.h 
 
 NAME    = client
 
@@ -35,7 +38,7 @@ re :		fclean
 			make all
 
 %.o: %.c    Makefile $(INCLUDE)
-		${CC} ${CFLAGS} -c $< -o $@
+		${CC} ${CFLAGS} -I $(INCLUDE) -c $< -o $@
 
 
 .PHONY:        all clean fclean re
