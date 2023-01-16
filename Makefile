@@ -6,7 +6,7 @@
 #    By: nmilan <nmilan@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/01/16 17:43:21 by nmilan            #+#    #+#              #
-#    Updated: 2023/01/16 17:54:20 by nmilan           ###   ########.fr        #
+#    Updated: 2023/01/16 18:09:14 by nmilan           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -23,6 +23,8 @@ clean :
 	make clean -C $(CLIENT_PATH)
 
 fclean : clean
+	make fclean -C $(SERVER_PATH)
+	make fclean -C $(CLIENT_PATH)
 
 re : fclean
 	make all
