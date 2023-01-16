@@ -6,7 +6,7 @@
 #    By: nmilan <nmilan@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/01/16 17:46:46 by nmilan            #+#    #+#              #
-#    Updated: 2023/01/16 17:48:02 by nmilan           ###   ########.fr        #
+#    Updated: 2023/01/16 17:55:28 by nmilan           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -23,7 +23,7 @@ NAME    = server
 
 CFLAGS    = -Wall -Wextra -Werror
 
-FT_PRINTF_PATH	=	ft_printf/
+FT_PRINTF_PATH	=	../ft_printf/
 
 FT_PRINTF_FILE	=	libftprintf.a
 
