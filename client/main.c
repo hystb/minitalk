@@ -6,14 +6,17 @@
 /*   By: nmilan <nmilan@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/09 16:02:57 by nmilan            #+#    #+#             */
-/*   Updated: 2023/01/10 13:03:42 by nmilan           ###   ########.fr       */
+/*   Updated: 2023/01/16 17:26:32 by nmilan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <signal.h>
 #include <unistd.h>
 
-int	ft_atoi(const char *str)
+static void	send_size(int size, int x, char **argv);
+static void	send_message(int size, int x, char **argv, int i);
+
+static int	ft_atoi(const char *str)
 {
 	int		i;
 	long	result;
@@ -40,7 +43,7 @@ int	ft_atoi(const char *str)
 	return (result);
 }
 
-int	ft_strlen(char *str)
+static int	ft_strlen(char *str)
 {
 	int	i;
 
@@ -60,16 +63,32 @@ int	main(int argc, char **argv)
 
 	i = 0;
 	x = 31;
+	if (argc != 3)
+	{
+		write(2, "Error\nRun the program as follow ./client <PID> <INFO>", 61);
+		return (0);
+	}
 	size = ft_strlen(argv[2]);
+	send_size(size, x, argv);
+	send_message(size, x, argv, i);
+	return (0);
+}
+
+static void	send_size(int size, int x, char **argv)
+{
 	while (x >= 0)
 	{
 		if (size >> x & 1)
 			kill(ft_atoi(argv[1]), SIGUSR2);
 		else
 			kill(ft_atoi(argv[1]), SIGUSR1);
-		usleep(500);
+		usleep(100);
 		x--;
 	}
+}
+
+static void	send_message(int size, int x, char **argv, int i)
+{
 	while (argv[2][i++])
 	{
 		x = 7;
@@ -79,9 +98,8 @@ int	main(int argc, char **argv)
 				kill(ft_atoi(argv[1]), SIGUSR2);
 			else
 				kill(ft_atoi(argv[1]), SIGUSR1);
-			usleep(500);
+			usleep(100);
 			x--;
 		}
 	}
-	return (0);
 }
