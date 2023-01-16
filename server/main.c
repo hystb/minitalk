@@ -6,7 +6,7 @@
 /*   By: nmilan <nmilan@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/16 12:43:56 by nmilan            #+#    #+#             */
-/*   Updated: 2023/01/16 17:59:00 by nmilan           ###   ########.fr       */
+/*   Updated: 2023/01/16 18:06:51 by nmilan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,8 +16,8 @@ int	main(int argc, char **argv)
 {
 	pid_t	pid;
 
-	if (argc != 1 || argv[0][0] != '\0')
-		write(2, "Error\nNo need Args", 19);
+	if (argc == 1 || argv[0][0] == '\0')
+		write(2, "Error\nNo need Args\n", 20);
 	pid = getpid();
 	ft_printf("Server has started\nPID : %d\n", pid);
 	signal(SIGUSR1, receive_message);
