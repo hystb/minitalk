@@ -6,7 +6,7 @@
 /*   By: nmilan <nmilan@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/09 16:02:57 by nmilan            #+#    #+#             */
-/*   Updated: 2023/01/16 17:26:32 by nmilan           ###   ########.fr       */
+/*   Updated: 2023/01/16 18:04:17 by nmilan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 #include <unistd.h>
 
 static void	send_size(int size, int x, char **argv);
-static void	send_message(int size, int x, char **argv, int i);
+static void	send_message(int x, char **argv, int i);
 
 static int	ft_atoi(const char *str)
 {
@@ -70,7 +70,7 @@ int	main(int argc, char **argv)
 	}
 	size = ft_strlen(argv[2]);
 	send_size(size, x, argv);
-	send_message(size, x, argv, i);
+	send_message(x, argv, i);
 	return (0);
 }
 
@@ -87,7 +87,7 @@ static void	send_size(int size, int x, char **argv)
 	}
 }
 
-static void	send_message(int size, int x, char **argv, int i)
+static void	send_message(int x, char **argv, int i)
 {
 	while (argv[2][i++])
 	{

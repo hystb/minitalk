@@ -6,16 +6,16 @@
 #    By: nmilan <nmilan@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/01/16 17:46:46 by nmilan            #+#    #+#              #
-#    Updated: 2023/01/16 17:55:28 by nmilan           ###   ########.fr        #
+#    Updated: 2023/01/16 18:03:20 by nmilan           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 SRC    =	main.c \
-			utils.c \			
+			utils.c			
 
 OBJS    =    ${SRC:%.c=%.o}
 
-INCLUDE		=	server.h \
+INCLUDE		=	server.h 
 
 CC    = cc
 
@@ -34,7 +34,7 @@ all :        ${NAME}
 lib_pf:
 	make -C $(FT_PRINTF_PATH)
 
-${NAME} : lib_pf ${OBJS} Makefile
+${NAME} : lib_pf ${OBJS}
 			$(CC) $(OBJS) $(FT_PRINTF_LIB) -o $(NAME)
 clean :
 	make clean -C $(FT_PRINTF_PATH)
