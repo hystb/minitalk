@@ -6,7 +6,7 @@
 #    By: nmilan <nmilan@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/01/16 17:43:21 by nmilan            #+#    #+#              #
-#    Updated: 2023/01/17 14:08:31 by nmilan           ###   ########.fr        #
+#    Updated: 2023/01/17 14:21:31 by nmilan           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -77,4 +77,4 @@ fclean : clean
 re : fclean
 	make all
 
-.PHONY:        all clean fclean re
+.PHONY:        all clean fclean re libs
